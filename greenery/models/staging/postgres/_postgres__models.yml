@@ -2,6 +2,7 @@ version: 2
 
 models:
   - name: stg_users
+    description: "A model with information about users"
   - name: stg_events
   - name: stg_addresses
   - name: stg_orders

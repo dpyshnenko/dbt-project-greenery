@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: "A fact table with all information about orders and number of products in it."
+    columns:
+      - name: order_id
+        tests: 
+          - unique
+          - not_null

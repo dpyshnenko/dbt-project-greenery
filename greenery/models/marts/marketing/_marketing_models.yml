@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: fact_user_order
+    description: >
+      A fact table with user_id grain to provide information about number of orders, 
+      first/last order time, etc per user_id
+    columns: 
+      - name: user_id
+        tests:
+          - not_null
+      - name: num_orders
+      - name: first_order_time
+      - name: last_order_time
+      - name: total_order_value
+      - name: full_name
+      - name: email
+      - name: phone_number
+      - name: created_at
+      - name: updated_at
+      - name: address_id

@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: fact_page_views
+    description: >
+      A fact table with information about each session_id
+    columns: 
+      - name: session_id
+        tests:
+         - unique
+         - not_null

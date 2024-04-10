@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: int_session_length
+    description: "An intermediate table to calculate start/end and session duration per session_id"
+    columns: 
+      - name: session_id
+        tests:
+          - unique
+          - not_null
