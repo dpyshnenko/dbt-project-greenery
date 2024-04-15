@@ -1,0 +1,8 @@
+macros:
+  - name: sum_macro
+    description: Aggregation logic for event types
+    arguments:
+      - name: col_name
+        description: Target column name
+      - name: col_value
+        description: Target value of the column

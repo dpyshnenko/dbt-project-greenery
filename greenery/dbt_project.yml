@@ -32,6 +32,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   greenery:
-    # Config indicated by + and applies to all files under models/example/
-    example:
       +materialized: view
+      +persist_docs:
+        relation: true
+        columns: true
+      +post-hook:
+        - "{{ grant(role='reporting') }}"
+tests: 
+  greenery: 
+    +severity: warn

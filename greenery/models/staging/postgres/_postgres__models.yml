@@ -4,9 +4,27 @@ models:
   - name: stg_users
     description: "A model with information about users"
   - name: stg_events
-  - name: stg_addresses
+    description: "Data with events information"
+    columns:
+      - name: event_type
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['checkout', 'package_shipped', 'add_to_cart', 'page_view']
+      - name: order_id
+        tests: 
+          - relationships: 
+              to: ref('stg_orders')
+              field: order_id
+              
   - name: stg_orders
   - name: stg_promos
+    description: "Information about product promos"
+    columns: 
+      - name: discount
+        tests: 
+         - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100
+
   - name: stg_order_items
   - name: stg_products
-

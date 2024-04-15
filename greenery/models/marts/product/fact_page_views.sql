@@ -16,6 +16,10 @@ addresses AS (
     SELECT * FROM {{ ref('stg_addresses')}}
 )
 
+{% set event_types = dbt_utils.get_column_values(
+    table=ref('stg_events'), 
+    column='event_type'
+) %}
 
 SELECT 
     events.session_id, 
@@ -29,10 +33,10 @@ SELECT
     addresses.country,
     COUNT(DISTINCT events.order_id) AS qty_orders,
     COUNT(DISTINCT product_id) AS qty_products,
-    SUM(CASE WHEN events.event_type = 'checkout' THEN 1 ELSE 0 END) AS is_checkout,
+    SUM(CASE WHEN events.event_type = ' ' THEN 1 ELSE 0 END) AS is_checkout,
     SUM(CASE WHEN events.event_type = 'package_shipped' THEN 1 ELSE 0 END) AS is_shipped,
     SUM(CASE WHEN events.event_type = 'add_to_cart' THEN 1 ELSE 0 END) AS is_added,
-    SUM(CASE WHEN events.event_type = 'page_view' THEN 1 ELSE 0 END) AS is_viewed,
+    SUM(CASE WHEN events.event_type = 'page_view' THEN 1 ELSE 0 END) AS is_viewed
 FROM 
     DEV_DB.DBT_DVPYSHNENKOGMAILCOM.STG_EVENTS events
 LEFT JOIN session_duration
